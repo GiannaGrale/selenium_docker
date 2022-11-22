@@ -1,0 +1,4 @@
+/jenkins
+/.idea
+agent.jar
+secret-file

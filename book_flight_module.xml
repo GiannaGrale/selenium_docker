@@ -1,0 +1,21 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="book-flight-module">
+    <test name="book flight-2">
+        <parameter name="noOfPassengers" value="2"/>
+        <classes>
+            <class name="com.newtours.BookFlightTest"/>
+        </classes>
+    </test>
+    <test name="book flight-3">
+        <parameter name="noOfPassengers" value="3"/>
+        <classes>
+            <class name="com.newtours.BookFlightTest"/>
+        </classes>
+    </test>
+    <test name="book flight-4">
+        <parameter name="noOfPassengers" value="4"/>
+        <classes>
+            <class name="com.newtours.BookFlightTest"/>
+        </classes>
+    </test>
+</suite>
