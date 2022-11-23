@@ -1,27 +1,56 @@
 pipeline {
-    // master executor should be set to 0
-    agent any
+    agent none
     stages {
         stage('Build Jar') {
+            agent {
+                docker {
+                    image 'maven:3-alpine'
+                    args '-v $HOME/.m2:/root/.m2'
+                }
+            }
             steps {
-                //sh
-                bat "mvn clean package -DskipTests"
+                bat 'mvn clean package -DskipTests'
             }
         }
         stage('Build Image') {
             steps {
-                //sh
-                bat "docker build -t hanna369/selenium-docker ."
+                script {
+                	app = docker.build("hanna369/selenium-docker")
+                }
             }
         }
         stage('Push Image') {
             steps {
-			    withCredentials([usernamePassword(credentialsId: 'dockerhub', passwordVariable: 'pass', usernameVariable: 'user')]) {
-                    //sh
-			        bat "docker login --username=${user} --password=${pass}"
-			        bat "docker push hanna369/selenium-docker:latest"
-			    }
+                script {
+			        docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
+			        	app.push("${BUILD_NUMBER}")
+			            app.push("latest")
+			        }
+                }
             }
         }
+        stage("Pull Latest Image"){
+        			steps{
+        				bat "docker pull hanna369/selenium-docker"
+        			}
+        		}
+        		stage("Start Grid"){
+        			steps{
+        				bat "docker-compose up -d hub chrome firefox"
+        			}
+        		}
+        		stage("Run Test"){
+        			steps{
+        				bat "docker-compose up search-module book_flight_module"
+        			}
+        		}
+        	}
+        	post{
+        		always{
+        			archiveArtifacts artifacts: 'output/**'
+        			bat "docker-compose down"
+        			bat "sudo rm -rf output/"
+        		}
+        	}
     }
 }
