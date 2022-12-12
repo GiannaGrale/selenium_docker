@@ -1,6 +1,10 @@
 pipeline {
     // master executor should be set to 0
-    agent any
+    agent {
+       docker {
+          image 'maven:3-alpine'
+          args '-v $HOME/.m2:/root/.m2'
+    }
     stages {
         stage('Build Jar') {
             steps {
@@ -11,15 +15,14 @@ pipeline {
         stage('Build Image') {
             steps {
                 //sh
-                sh "docker build -t hanna369/selenium-docker ."
+                app = docker.build("hanna369/selenium-docker")
             }
         }
         stage('Push Image') {
             steps {
 			    withCredentials([usernamePassword(credentialsId: 'dockerhub', passwordVariable: 'pass', usernameVariable: 'user')]) {
                     //sh
-			        sh "docker login --username=${user} --password=${pass}"
-			        sh "docker push hanna369/selenium-docker:latest"
+			         app.push("latest")
 			    }
             }
         }
