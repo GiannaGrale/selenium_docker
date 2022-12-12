@@ -23,5 +23,27 @@ pipeline {
 			    }
             }
         }
+        stage('Pull Latest Image') {
+        	steps {
+        			bat "docker pull hanna369/selenium-docker"
+        	}
+        }
+        stage('Start grid'){
+              steps{
+        			bat "docker-compose up -d hub chrome firefox"
+              }
+        }
+        stage('Run tests'){
+                steps{
+			     	bat "docker-compose up search-module"
+			}
+        }
     }
+}
+	post{
+		always{
+			archiveArtifacts artifacts: 'output/**'
+			bat "docker-compose down"
+		}
+	}
 }
