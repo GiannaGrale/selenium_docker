@@ -6,7 +6,6 @@ pipeline {
           args '-v $HOME/.m2:/root/.m2'
        }
     }
-
     stages {
         stage('Build Jar') {
             steps {
@@ -17,14 +16,15 @@ pipeline {
         stage('Build Image') {
             steps {
                 //sh
-                app = docker.build("hanna369/selenium-docker")
+                sh "docker build -t hanna369/selenium-docker ."
             }
         }
         stage('Push Image') {
             steps {
 			    withCredentials([usernamePassword(credentialsId: 'dockerhub', passwordVariable: 'pass', usernameVariable: 'user')]) {
                     //sh
-			         app.push("latest")
+			        sh "docker login --username=${user} --password=${pass}"
+			        sh "docker push hanna369/selenium-docker:latest"
 			    }
             }
         }
