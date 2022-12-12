@@ -17,7 +17,7 @@ services:
       - hub
     environment:
       - HUB_HOST=hub
-  search-module1:
+  search-module:
     image: hanna369/selenium-docker
     depends_on:
       - chrome
@@ -28,17 +28,6 @@ services:
       - MODULE=search-module.xml
 #    volumes:
 #      - DockerProject/search-result1:/Users/Lenovo/DockerProject/search-result1
-  search-module2:
-    image: hanna369/selenium-docker
-    depends_on:
-      - chrome
-      - firefox
-    environment:
-      - HUB_HOST=hub
-      - BROWSER=chrome
-      - MODULE=search-module.xml
-#    volumes:
-#      - /DockerProject/search-result2:/Users/Lenovo/DockerProject/search-result2
   book_flight_module:
     image: hanna369/selenium-docker
     depends_on:
