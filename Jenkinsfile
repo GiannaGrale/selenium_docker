@@ -11,7 +11,7 @@ pipeline {
         stage('Build Image') {
             steps {
                 //sh
-                bat "docker build -t hanna369/docker-demo ."
+                bat "docker build -t=hanna369/docker-demo ."
             }
         }
         stage('Push Image') {
@@ -37,6 +37,7 @@ pipeline {
 	post{
 		always{
 			archiveArtifacts artifacts: 'output/**'
+			bat "docker-compose down"
 		}
 	}
 }
