@@ -11,7 +11,7 @@ ADD target/selenium-docker-tests.jar   selenium-docker-tests.jar
 ADD target/libs                        libs
 
 #Add suitefiles
-ADD book_flight_module.xml             book_flight_module.xml
+ADD flight-module.xml                  flight-module.xml
 ADD search-module.xml                  search-module.xml
 
 #Add health check script & convert to unix format

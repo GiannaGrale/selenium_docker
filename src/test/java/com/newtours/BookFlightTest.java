@@ -43,9 +43,4 @@ public class BookFlightTest extends BaseTest {
         FlightAvailabilityPage flightAvailabilityPage = new FlightAvailabilityPage(driver);
         flightAvailabilityPage.checkAvailability();
     }
-
-    @AfterTest
-    public void quitDriver() {
-        driver.quit();
-    }
 }
