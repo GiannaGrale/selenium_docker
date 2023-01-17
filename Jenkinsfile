@@ -28,11 +28,6 @@ pipeline {
         			bat "docker pull hanna369/docker-demo"
         	}
         }
-        stage('Start grid'){
-              steps{
-        			bat "docker-compose up -d hub chrome firefox"
-              }
-        }
         stage('Run tests'){
                 steps{
 			     	bat "docker-compose up"
