@@ -38,5 +38,10 @@ pipeline {
 		always{
 			archiveArtifacts artifacts: 'output/**'
 		}
+		stage('Close Docker Compose') {
+		     steps{
+		          bat "docker-compose down"
+		     }
+		}
 	}
 }
