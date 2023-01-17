@@ -35,7 +35,7 @@ pipeline {
         }
         stage('Run tests'){
                 steps{
-			     	bat "docker-compose up search-module flight-module"
+			     	bat "docker-compose up"
 			}
         }
     }
