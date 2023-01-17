@@ -30,14 +30,14 @@ pipeline {
         }
         stage('Run tests'){
                 steps{
-			     	bat "docker compose up"
+			     	bat "docker compose up search-module flight-module"
 			}
         }
     }
 	post{
 		always{
 			archiveArtifacts artifacts: 'output/**'
-			bat "docker compose down"
+			bat "docker-compose down"
 		}
 	}
 }
