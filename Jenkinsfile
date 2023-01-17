@@ -11,7 +11,7 @@ pipeline {
         stage('Build Image') {
             steps {
                 //sh
-                bat "docker build -t hanna369/selenium-docker ."
+                bat "docker build -t hanna369/docker-demo ."
             }
         }
         stage('Push Image') {
@@ -19,13 +19,13 @@ pipeline {
 			    withCredentials([usernamePassword(credentialsId: 'dockerhub', passwordVariable: 'pass', usernameVariable: 'user')]) {
                     //sh
 			        bat "docker login --username=${user} --password=${pass}"
-			        bat "docker push hanna369/selenium-docker:latest"
+			        bat "docker push hanna369/docker-demo:latest"
 			    }
             }
         }
         stage('Pull Latest Image') {
         	steps {
-        			bat "docker pull hanna369/selenium-docker"
+        			bat "docker pull hanna369/docker-demo"
         	}
         }
         stage('Start grid'){
@@ -35,7 +35,7 @@ pipeline {
         }
         stage('Run tests'){
                 steps{
-			     	bat "docker-compose up search-module"
+			     	bat "docker-compose up search-module flight-module"
 			}
         }
     }
