@@ -2,10 +2,11 @@ package com.searchpage;
 
 import com.BaseTest;
 import com.pages.searchmodule.SearchPage;
-import org.testng.Assert;
 import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
+
+import static org.testng.AssertJUnit.assertTrue;
 
 public class SearchTest extends BaseTest {
 
@@ -17,6 +18,6 @@ public class SearchTest extends BaseTest {
         searchPage.doSearch(keyword);
         searchPage.goToVideos();
         int size = searchPage.getResult();
-        Assert.assertTrue(size > 0);
+        assertTrue(size > 0);
     }
 }
