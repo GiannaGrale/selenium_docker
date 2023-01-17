@@ -25,7 +25,9 @@ public class FlightDetailsPage {
         this.wait = new WebDriverWait(driver,30);
         PageFactory.initElements(driver, this);
     }
-
+    public void goToReservationPage() {
+        this.driver.navigate().to("https://demo.guru99.com/test/newtours/reservation.php");
+    }
     public void selectPassengers(String numOfPassengers) {
         this.wait.until(ExpectedConditions.elementToBeClickable(passengers));
         Select select = new Select(passengers);

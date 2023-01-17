@@ -34,6 +34,7 @@ public class BookFlightTest extends BaseTest {
     @Test(dependsOnMethods = "registrationConfirmationPageTest")
     public void flightDetailsPageTest() {
         FlightDetailsPage detailsPage = new FlightDetailsPage(driver);
+        detailsPage.goToReservationPage();
         detailsPage.selectPassengers("2");
         detailsPage.goToFindFlightsPage();
     }
