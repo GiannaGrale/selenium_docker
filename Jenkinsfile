@@ -1,9 +1,6 @@
 pipeline {
     // master executor should be set to 0
     agent any
-        triggers {
-            cron('H/10 * * * *')
-        }
     stages {
         stage('Build Jar') {
             steps {
