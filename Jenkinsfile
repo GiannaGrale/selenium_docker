@@ -36,7 +36,7 @@ pipeline {
     }
         stage('Report') {
                steps {
-                      publishHTML([reportName  : 'Allure Report', reportDir: 'target/test_results', reportFiles: 'index.html',
+                      publishHTML([reportName  : 'Allure Report', reportDir: 'target/allure-results', reportFiles: 'index.html',
                                   reportTitles: '', allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false])
            }
         }
