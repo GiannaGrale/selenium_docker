@@ -36,14 +36,10 @@ pipeline {
 
         stage('reports') {
                 steps {
-                       script {
+                        script {
                         allure([
-                        includeProperties: false,
-                        jdk: '',
-                        properties: [],
-                        reportBuildPolicy: 'ALWAYS',
-                        results: [[path: 'target/allure-results']]
-                ])
+                        includeProperties: false, jdk: '', results: [[path: 'allure-results']]
+                        ])
                 }
             }
         }
