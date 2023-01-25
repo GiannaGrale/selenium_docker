@@ -33,13 +33,13 @@ pipeline {
 			     	bat "docker compose up search-module flight-module"
 			}
         }
-    }
         stage('Report') {
                steps {
                       publishHTML([reportName  : 'Allure Report', reportDir: 'target/allure-results', reportFiles: 'index.html',
                                   reportTitles: '', allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false])
            }
         }
+     }
     
 	post{
 		always{
