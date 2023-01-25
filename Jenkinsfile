@@ -36,7 +36,6 @@ pipeline {
     }
 	post{
 		always{
-		    allure includeProperties: false, jdk: '', results: [[path: 'allure-results']]
 			bat "docker compose down"
 		}
 	}
