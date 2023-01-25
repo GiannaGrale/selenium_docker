@@ -29,17 +29,24 @@ pipeline {
         	}
         }
         stage('Run tests'){
-                steps{
+                steps {
 			     	bat "docker compose up search-module flight-module"
 			}
         }
-        stage('Report') {
-               steps {
-                      publishHTML([reportName  : 'Allure Report', reportDir: 'target/allure-results', reportFiles: 'index.html',
-                                  reportTitles: '', allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false])
-           }
+
+        stage('reports') {
+                steps {
+                       script {
+                        allure([
+                        includeProperties: false,
+                        jdk: '',
+                        properties: [],
+                        reportBuildPolicy: 'ALWAYS',
+                        results: [[path: 'target/allure-results']]
+                ])
+            }
         }
-     }
+    }
     
 	post{
 		always{
