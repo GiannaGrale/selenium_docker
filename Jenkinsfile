@@ -34,9 +34,15 @@ pipeline {
 			}
         }
     }
+        stage('Report') {
+               steps {
+                      publishHTML([reportName  : 'Allure Report', reportDir: 'target/test_results', reportFiles: 'index.html',
+                                  reportTitles: '', allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false])
+           }
+        }
+    
 	post{
 		always{
-		    allure includeProperties: false, jdk: '', results: [[path: 'allure-results']]
 			bat "docker compose down"
 		}
 	}
