@@ -14,7 +14,6 @@ ADD target/libs                        libs
 ADD flight-module.xml                  flight-module.xml
 ADD search-module.xml                  search-module.xml
 
-
 #Add health check script & convert to unix format
 ADD healthcheck.sh                     healthcheck.sh
 RUN dos2unix healthcheck.sh
