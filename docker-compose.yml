@@ -25,8 +25,7 @@ services:
       - BROWSER=firefox
       - MODULE=search-module.xml
     volumes:
-      - ./output/search-result:/usr/share/udemy/test-output
-      - ./output:/usr/share/udemy/allure-results
+      - ./output:/usr/share/udemy/target/allure-results
   flight-module:
     image: hanna369/docker-demo
     depends_on:
@@ -37,6 +36,5 @@ services:
       - BROWSER=chrome
       - MODULE=flight-module.xml
     volumes:
-      - ./output/book-result:/usr/share/udemy/test-output
-      - ./output:/usr/share/udemy/allure-results
+      - ./output:/usr/share/udemy/target/allure-results
 
