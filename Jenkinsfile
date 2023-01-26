@@ -34,11 +34,11 @@ pipeline {
 			}
         }
 
-        stage('reports') {
+        stage('Reports') {
                 steps {
                         script {
                         allure([
-                        includeProperties: false, jdk: '', results: [[path: 'allure-results']]
+                        includeProperties: false, jdk: '', results: [[path: 'target/allure-results']]
                         ])
                 }
             }
