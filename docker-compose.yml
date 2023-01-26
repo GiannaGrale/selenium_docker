@@ -2,8 +2,6 @@ version: "3"
 services:
   hub:
     image: selenium/hub:3.14
-    ports:
-      - "4444:4444"
   chrome:
     image: selenium/node-chrome:3.14
     depends_on:
@@ -26,6 +24,9 @@ services:
       - HUB_HOST=hub
       - BROWSER=firefox
       - MODULE=search-module.xml
+    volumes:
+      - ./output/search-result:/usr/share/udemy/test-output
+      - ./output:/usr/share/udemy/allure-results
   flight-module:
     image: hanna369/docker-demo
     depends_on:
@@ -35,3 +36,7 @@ services:
       - HUB_HOST=hub
       - BROWSER=chrome
       - MODULE=flight-module.xml
+    volumes:
+      - ./output/book-result:/usr/share/udemy/test-output
+      - ./output:/usr/share/udemy/allure-results
+
