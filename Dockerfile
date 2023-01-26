@@ -13,6 +13,7 @@ ADD target/libs                        libs
 #Add suitefiles
 ADD flight-module.xml                  flight-module.xml
 ADD search-module.xml                  search-module.xml
+COPY target/allure-results             allure-results
 
 #Add health check script & convert to unix format
 ADD healthcheck.sh                     healthcheck.sh
