@@ -1,10 +1,6 @@
 pipeline {
     // master executor should be set to 0
     agent any
-        environment {
-            REPORT_PATH = "allure-results"
-            REPORT_NAME = "REPORT.docx"
-        }
     stages {
         stage('Build Jar'){
             steps {
@@ -38,8 +34,8 @@ pipeline {
 			}
         }
         stage('Reports') {
-            steps {
-              script {
+             steps {
+                 script {
                     allure([
                             includeProperties: false,
                             jdk: '',
@@ -50,24 +46,18 @@ pipeline {
             }
         }
     }
-        stage('Publish') {
-            echo 'Publish Allure report'
-            publishHTML(
-                    target: [
-                            allowMissing         : false,
-                            alwaysLinkToLastBuild: false,
-                            keepAll              : true,
-                            reportDir            : 'target/site/allure-maven-plugin',
-                            reportFiles          : 'index.html',
-                            reportName           : "Allure Report"
-                    ]
-            )
-        }
-    }
-
 	post{
 		always{
 		    archiveArtifacts artifacts: 'target/**'
+		     publishHTML(
+              target: [
+                     allowMissing         : false,
+                     alwaysLinkToLastBuild: false,
+                     keepAll              : true,
+                     reportDir            : 'target/site/allure-maven-plugin',
+                     reportFiles          : 'index.html',
+                     reportName           : "Allure Report"
+                     ])
 			bat "docker compose down"
 		}
     }
