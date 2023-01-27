@@ -35,20 +35,5 @@ services:
       - HUB_HOST=hub
       - BROWSER=chrome
       - MODULE=flight-module.xml
-  allure:
-      image: "frankescobar/allure-docker-service"
-      environment:
-        CHECK_RESULTS_EVERY_SECONDS: 1
-        KEEP_HISTORY: 1
-      ports:
-        - "5050:5050"
-      volumes:
-        - /home/qa/jenkins/workspace/Docker_Demo/target/allure-results:/app/allure-results
-        - /home/qa/jenkins/workspace/Docker_Demo/target/allure-report:/app/default-reports
-  allure-ui:
-    image: "frankescobar/allure-docker-service-ui"
-    environment:
-      ALLURE_DOCKER_PUBLIC_API_URL: "http://localhost:5050"
-      ALLURE_DOCKER_PUBLIC_API_URL_PREFIX: ""
-    ports:
-      - "5252:5252"
+    volumes:
+      - ./output:/usr/share/udemy/allure-results
