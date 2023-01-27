@@ -40,7 +40,7 @@ pipeline {
     }
 	post{
 		always{
-		    archiveArtifacts artifacts: 'allure-results/**'
+		    archiveArtifacts artifacts: 'output/**'
 			bat "docker compose down"
 		}
 	}
