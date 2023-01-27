@@ -40,7 +40,7 @@ pipeline {
 
 	    stage('Execute') {
 	           steps {
-                       script {
+                   script {
 		/* Execute the test script. On faliure proceed to next step */
               catchError(buildResult: 'FAILURE', stageResult: 'FAILURE') {
               bat 'mvn test'
@@ -60,6 +60,7 @@ pipeline {
                  reportBuildPolicy: 'ALWAYS',
                  results: [[path: 'target/allure-results']]
                  ])
+                 }
              }
 		}
 	}
