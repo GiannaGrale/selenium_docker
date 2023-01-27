@@ -39,7 +39,7 @@ pipeline {
 			 archiveArtifacts artifacts: 'allure-results'
              script {
                  allure([
-                    includeProperties: false, jdk: '', properties: [], reportBuildPolicy: 'ALWAYS', results: [[path: 'allure-results']]
+                    includeProperties: false, jdk: '', properties: [], reportBuildPolicy: 'ALWAYS', results: [[path: 'allure-results/**']]
                      ])
                     }
 			bat "docker compose down"
