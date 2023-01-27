@@ -37,13 +37,7 @@ pipeline {
 			     	bat "docker compose up search-module flight-module"
 			}
         }
-
-       stage('Generate Report') {
-             steps {
-              bat 'docker-compose up allure'
-       }
     }
-}
 	post{
 		always{
 		    archiveArtifacts artifacts: 'output/**'
