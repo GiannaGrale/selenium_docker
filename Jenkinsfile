@@ -38,40 +38,29 @@ pipeline {
 			}
         }
     }
-        stage('Report') {
-            steps {
-                  script {
-                       try {
-                            bat "behave -f allure_behave.formatter:AllureFormatter -o allure-results ./features -f pretty"
-                            ignoreFailures=true
-
-                       } catch(err){
-                            echo "Report Failure"
-
-                       } finally {
-                        script {
-                            allure ([
-                                includeProperties: false,
-                                jdk: '',
-                                reportBuildPolicy: 'ALWAYS',
-                                results: [[path: 'allure-results']],
-                           ])
-                      }
-                  }
+	stage('Execute') {
+		 steps {
+                script {
+		/* Execute the test script. On faliure proceed to next step */
+              catchError(buildResult: 'FAILURE', stageResult: 'FAILURE') {
+              bat 'mvn test'
+              bat 'docker run --network="host" --rm -v ${WORKSPACE}/allure-results:/AllureReports hanna369/docker-demo  .'
               }
-           }
-       }
-        stage('Generate Report'){
-                   steps{
-                        bat "allure-docx ${REPORT_PATH} ${REPORT_NAME}"
-                         archiveArtifacts "${REPORT_NAME}"
-                   }
-               }
-           }
-       }
+        }
+    }
+}
 	post{
 		always{
 			bat "docker compose down"
+			script {
+                allure([
+                 includeProperties: false,
+                 jdk: '',
+                 properties: [],
+                 reportBuildPolicy: 'ALWAYS',
+                 results: [[path: 'target/allure-results']]
+                 ])
+             }
 		}
 	}
 }
