@@ -1,6 +1,10 @@
 pipeline {
     // master executor should be set to 0
     agent any
+        environment {
+            REPORT_PATH = "allure-results"
+            REPORT_NAME = "REPORT.docx"
+        }
     stages {
         stage('Build Jar'){
             steps {
@@ -55,6 +59,14 @@ pipeline {
                       }
                   }
               }
+           }
+       }
+        stage('Generate Report'){
+                   steps{
+                        bat "allure-docx ${REPORT_PATH} ${REPORT_NAME}"
+                         archiveArtifacts "${REPORT_NAME}"
+                   }
+               }
            }
        }
 	post{
