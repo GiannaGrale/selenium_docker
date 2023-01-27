@@ -46,6 +46,7 @@ pipeline {
               bat 'mvn test'
               bat 'docker run --network="host" --rm -v ${WORKSPACE}/allure-results:/AllureReports hanna369/docker-demo  .'
               }
+            }
          }
      }
 }
@@ -64,4 +65,4 @@ pipeline {
              }
 		}
 	}
-}
+
