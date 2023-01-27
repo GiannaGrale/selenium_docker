@@ -1,6 +1,10 @@
 pipeline {
     // master executor should be set to 0
     agent any
+        environment {
+            REPORT_PATH = "allure-results"
+            REPORT_NAME = "REPORT.docx"
+        }
     stages {
         stage('Build Jar'){
             steps {
@@ -34,14 +38,39 @@ pipeline {
 			}
         }
     }
+        stage('Report') {
+            steps {
+                  script {
+                       try {
+                            bat "behave -f allure_behave.formatter:AllureFormatter -o allure-results ./features -f pretty"
+                            ignoreFailures=true
+
+                       } catch(err){
+                            echo "Report Failure"
+
+                       } finally {
+                        script {
+                            allure ([
+                                includeProperties: false,
+                                jdk: '',
+                                reportBuildPolicy: 'ALWAYS',
+                                results: [[path: 'allure-results']],
+                           ])
+                      }
+                  }
+              }
+           }
+       }
+        stage('Generate Report'){
+                   steps{
+                        bat "allure-docx ${REPORT_PATH} ${REPORT_NAME}"
+                         archiveArtifacts "${REPORT_NAME}"
+                   }
+               }
+           }
+       }
 	post{
 		always{
-			 archiveArtifacts artifacts: 'allure-results/**'
-             script {
-                 allure([
-                    includeProperties: false, jdk: '', properties: [], reportBuildPolicy: 'ALWAYS', results: [[path: 'allure-results/**']]
-                     ])
-                    }
 			bat "docker compose down"
 		}
 	}
