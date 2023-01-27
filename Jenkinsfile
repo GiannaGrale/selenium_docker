@@ -43,6 +43,7 @@ pipeline {
               bat 'sh report.sh'
        }
     }
+}
 	post{
 		always{
 		    archiveArtifacts artifacts: 'output/**'
