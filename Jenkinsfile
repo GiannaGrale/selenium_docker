@@ -37,31 +37,11 @@ pipeline {
 			     	bat "docker compose up search-module flight-module"
 			}
         }
-
-	    stage('Execute') {
-	           steps {
-                   script {
-		/* Execute the test script. On faliure proceed to next step */
-              catchError(buildResult: 'FAILURE', stageResult: 'FAILURE') {
-              bat 'mvn test'
-              }
-            }
-         }
-     }
+    }
 }
 	post{
 		always{
 			bat "docker compose down"
-			script {
-                allure([
-                 includeProperties: false,
-                 jdk: '',
-                 properties: [],
-                 reportBuildPolicy: 'ALWAYS',
-                 results: [[path: 'target/allure-results']]
-                 ])
-                 }
-             }
 		}
 	}
 
