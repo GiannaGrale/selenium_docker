@@ -63,11 +63,12 @@ pipeline {
             )
         }
     }
+}
 	post{
 		always{
 		    archiveArtifacts artifacts: 'target/**'
 			bat "docker compose down"
 		}
-	}
+  }
 }
 
