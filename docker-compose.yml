@@ -35,7 +35,6 @@ services:
       - HUB_HOST=hub
       - BROWSER=chrome
       - MODULE=flight-module.xml
-
   allure:
       image: "frankescobar/allure-docker-service"
       environment:
