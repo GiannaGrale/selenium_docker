@@ -44,7 +44,6 @@ pipeline {
 		/* Execute the test script. On faliure proceed to next step */
               catchError(buildResult: 'FAILURE', stageResult: 'FAILURE') {
               bat 'mvn test'
-              bat 'docker run --network="host" --rm -v ${WORKSPACE}/allure-results:/AllureReports hanna369/docker-demo  .'
               }
             }
          }
