@@ -39,7 +39,7 @@ pipeline {
         }
         stage('Reports') {
             steps {
-            script {
+              script {
                     allure([
                             includeProperties: false,
                             jdk: '',
@@ -49,6 +49,7 @@ pipeline {
                     ])
             }
         }
+    }
         stage('Publish') {
             echo 'Publish Allure report'
             publishHTML(
@@ -63,12 +64,12 @@ pipeline {
             )
         }
     }
-}
+
 	post{
 		always{
 		    archiveArtifacts artifacts: 'target/**'
 			bat "docker compose down"
 		}
-  }
+    }
 }
 
