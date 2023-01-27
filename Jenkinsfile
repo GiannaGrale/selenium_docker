@@ -34,14 +34,31 @@ pipeline {
 			}
         }
     }
+        stage('Report') {
+            steps {
+                  script {
+                       try {
+                            bat "behave -f allure_behave.formatter:AllureFormatter -o allure-results ./features -f pretty"
+                            ignoreFailures=true
+
+                       } catch(err){
+                            echo "Report Failure"
+
+                       } finally {
+                        script {
+                            allure ([
+                                includeProperties: false,
+                                jdk: '',
+                                reportBuildPolicy: 'ALWAYS',
+                                results: [[path: 'allure-results']],
+                           ])
+                      }
+                  }
+              }
+           }
+       }
 	post{
 		always{
-			 archiveArtifacts artifacts: 'allure-results/**'
-             script {
-                 allure([
-                    includeProperties: false, jdk: '', properties: [], reportBuildPolicy: 'ALWAYS', results: [[path: 'allure-results/**']]
-                     ])
-                    }
 			bat "docker compose down"
 		}
 	}
