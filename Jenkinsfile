@@ -33,16 +33,6 @@ pipeline {
 			     	bat "docker compose up search-module flight-module"
 			}
         }
-
-        stage('Reports') {
-                steps {
-                        script {
-                        allure([
-                        includeProperties: false, jdk: '', properties: [], reportBuildPolicy: 'ALWAYS', results: [[path: 'target/allure-results']]
-                        ])
-                }
-            }
-        }
     }
     
 	post{
@@ -50,5 +40,12 @@ pipeline {
 		    archiveArtifacts artifacts: 'target/allure-results'
 			bat "docker compose down"
 		}
-	}
+                steps {
+                        script {
+                        allure([
+                        includeProperties: false, jdk: '', properties: [], reportBuildPolicy: 'ALWAYS', results: [[path: 'target/allure-results']]
+                        ])
+            }
+        }
+    }
 }
