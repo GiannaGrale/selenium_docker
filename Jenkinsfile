@@ -37,6 +37,11 @@ pipeline {
 			     	bat "docker compose up search-module flight-module"
 			}
         }
+
+       stage('Generate Report') {
+             steps {
+              bat 'sh report.sh'
+       }
     }
 	post{
 		always{
