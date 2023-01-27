@@ -38,7 +38,7 @@ pipeline {
                 steps {
                         script {
                         allure([
-                        includeProperties: false, jdk: '', properties: [], reportBuildPolicy: 'ALWAYS', results: [[path: 'output/allure-results']]
+                        includeProperties: false, jdk: '', properties: [], reportBuildPolicy: 'ALWAYS', results: [[path: 'target/allure-results']]
                         ])
                 }
             }
@@ -47,7 +47,7 @@ pipeline {
     
 	post{
 		always{
-		    archiveArtifacts artifacts: 'output/**'
+		    archiveArtifacts artifacts: 'target/allure-results'
 			bat "docker compose down"
 		}
 	}
