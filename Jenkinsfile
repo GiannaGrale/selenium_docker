@@ -36,7 +36,7 @@ pipeline {
     }
 	post{
 		always{
-			 archiveArtifacts artifacts: 'target/allure-results'
+			 archiveArtifacts artifacts: 'allure-results'
              script {
                  allure([
                     includeProperties: false, jdk: '', properties: [], reportBuildPolicy: 'ALWAYS', results: [[path: 'allure-results']]
