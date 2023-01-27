@@ -40,7 +40,7 @@ pipeline {
 
        stage('Generate Report') {
              steps {
-              bat 'sh report.sh'
+              bat 'docker-compose up allure'
        }
     }
 }
