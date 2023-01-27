@@ -2,19 +2,19 @@ pipeline {
     // master executor should be set to 0
     agent any
     stages {
-        stage('Build Jar') {
+        stage('Build Jar'){
             steps {
                 //sh
                 bat "mvn clean package -DskipTests"
             }
         }
-        stage('Build Image') {
+        stage('Build Image'){
             steps {
                 //sh
                 bat "docker build -t=hanna369/docker-demo ."
             }
         }
-        stage('Push Image') {
+        stage('Push Image'){
             steps {
 			    withCredentials([usernamePassword(credentialsId: 'dockerhub', passwordVariable: 'pass', usernameVariable: 'user')]) {
                     //sh
@@ -23,7 +23,7 @@ pipeline {
 			    }
             }
         }
-        stage('Pull Latest Image') {
+        stage('Pull Latest Image'){
         	steps {
         			bat "docker pull hanna369/docker-demo"
         	}
@@ -34,13 +34,12 @@ pipeline {
 			}
         }
     }
-    
 	post{
 		always{
-			 archiveArtifacts artifacts: 'target/allure-results'
+			 archiveArtifacts artifacts: 'allure-results'
              script {
                  allure([
-                    includeProperties: false, jdk: '', properties: [], reportBuildPolicy: 'ALWAYS', results: [[path: 'target/allure-results']]
+                    includeProperties: false, jdk: '', properties: [], reportBuildPolicy: 'ALWAYS', results: [[path: 'allure-results']]
                      ])
                     }
 			bat "docker compose down"
