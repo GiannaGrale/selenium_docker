@@ -50,15 +50,6 @@ pipeline {
 	post{
 		always{
 		    archiveArtifacts artifacts: 'target/**'
-		     publishHTML(
-              target: [
-                     allowMissing         : false,
-                     alwaysLinkToLastBuild: false,
-                     keepAll              : true,
-                     reportDir            : 'target/allure-results',
-                     reportFiles          : 'index.html',
-                     reportName           : "Allure Report"
-                     ])
 			bat "docker compose down"
 		}
     }
