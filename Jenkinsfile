@@ -55,7 +55,7 @@ pipeline {
                      allowMissing         : false,
                      alwaysLinkToLastBuild: false,
                      keepAll              : true,
-                     reportDir            : 'report/allure-results',
+                     reportDir            : 'target/allure-results',
                      reportFiles          : 'index.html',
                      reportName           : "Allure Report"
                      ])
