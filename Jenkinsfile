@@ -55,7 +55,7 @@ pipeline {
                      allowMissing         : false,
                      alwaysLinkToLastBuild: false,
                      keepAll              : true,
-                     reportDir            : 'target/site/allure-maven-plugin',
+                     reportDir            : 'report/allure-results',
                      reportFiles          : 'index.html',
                      reportName           : "Allure Report"
                      ])
