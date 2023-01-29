@@ -12,7 +12,7 @@ public class SearchTest extends BaseTest {
 
     @Test
     @Parameters({"keyword"})
-    public void search(@Optional("aqa") String keyword) {
+    public void search(@Optional("test") String keyword) {
         SearchPage searchPage = new SearchPage(driver);
         searchPage.goTo();
         searchPage.doSearch(keyword);
