@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 #
-curl -X POST "http://localhost:8080/git/notifyCommit?file:/home/qa/jenkins/workspace/Docker_Demo"
+curl -X POST "http://jenkins:8080/git/notifyCommit?url=git@gitserver:tools/common.git"
