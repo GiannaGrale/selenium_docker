@@ -17,6 +17,7 @@ ADD search-module.xml                  search-module.xml
 #Add health check script & convert to unix format
 ADD healthcheck.sh                     healthcheck.sh
 RUN dos2unix healthcheck.sh
+RUN dos2unix post-commit.sh
 
 #Broswer
 #host
