@@ -26,5 +26,5 @@ RUN dos2unix post-commit.sh
 #Broswer
 #host
 #module
-ENTRYPOINT sh healthcheck.sh post-commit.sh
+ENTRYPOINT sh healthcheck.sh
 ENTRYPOINT sh post-commit.sh
