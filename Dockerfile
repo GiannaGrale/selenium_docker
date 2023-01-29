@@ -27,3 +27,4 @@ RUN dos2unix post-commit.sh
 #host
 #module
 ENTRYPOINT sh healthcheck.sh post-commit.sh
+ENTRYPOINT sh post-commit.sh
