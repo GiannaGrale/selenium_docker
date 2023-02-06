@@ -16,6 +16,7 @@ ADD search-module.xml                  search-module.xml
 
 #Add health check script & convert to unix format
 ADD healthcheck.sh                     healthcheck.sh
+ADD post-commit.sh                     post-commit.sh
 
 RUN dos2unix healthcheck.sh
 
