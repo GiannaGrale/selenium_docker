@@ -7,6 +7,7 @@ pipeline {
                     //sh
                     bat "post-commit.sh"
                 }
+         }
         stage('Build Jar'){
             steps {
                 //sh
