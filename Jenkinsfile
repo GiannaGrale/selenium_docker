@@ -2,12 +2,6 @@ pipeline {
     // master executor should be set to 0
     agent any
     stages {
-         stage('Init'){
-                steps {
-                    //sh
-                    bat "post-commit.sh"
-                }
-         }
         stage('Build Jar'){
             steps {
                 //sh
